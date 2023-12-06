@@ -1,0 +1,185 @@
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Image, TouchableOpacity, navigation, Home, Settings, Button, SplashScreen, registerComponent } from 'react-native';
+import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { ImageBackground } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppRegistry } from 'react-native';
+
+AppRegistry.registerComponent()
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+      <Button
+        title="Ir para Perfil"
+        onPress={() => navigation.navigate('Perfil')}
+      />
+    </View>
+  );
+}
+
+function SettingsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Perfil!</Text>
+      <Button
+        title="Ir para Home"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Perfil" component={SettingsScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
+const SettingsStack = createNativeStackNavigator();
+
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="Home" component={HomeScreen} />
+      <SettingsStack.Screen name="Perfil" component={SettingsScreen} />
+    </SettingsStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+
+export default function App() {
+  let [fontsLoaded, fontError] = useFonts({
+    Inter_900Black,
+  });
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+  return (
+    <View style={styles.container}>
+      <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'ios-information-circle'
+                : 'ios-information-circle-outline';
+            } else if (route.name === 'Perfil') {
+              iconName = focused ? 'ios-list' : 'ios-list-outline';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={Home} size={10} color={'#0B2909'} />;
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Perfil" component={SettingsScreen} />
+      </Tab.Navigator>
+      </NavigationContainer>
+      <ImageBackground source={require('./assets/telas (9).png')} style={styles.imgcima}><Text style={styles.text1}>Seja bem-vindo(a)!</Text>
+      <Text style={styles.ola}>Ola, usuario!</Text></ImageBackground>
+      <ImageBackground source={require('./assets/telas (8).png')} style={styles.img2}><Text style={styles.textult}>Ultima Irrigaçao</Text></ImageBackground>
+      <View>
+          <TouchableOpacity style={styles.greenButton}>
+            <Text style={styles.buttonText}>Agendar Irrigaçao</Text>
+          </TouchableOpacity>
+      </View>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imgcima: {
+  backgroundColor: '#0B2909',
+  width: 428,
+  height: 313,
+  top: -450,
+  borderRadius: 70,
+
+  },
+  text1: {
+    width: 142,
+    height: 18,
+    top: 147,
+    left: 39,
+    fontFamily: 'Inter_900Black',
+    fontSize: 15,
+    fontWeight: 700,
+    lineHeight: 18,
+    letterSpacing: 0,
+    textAlign: 'left',
+        
+  },
+  ola: {
+    width: 48,
+    height: 81,
+    top: 184,
+    left: 57,
+    fontFamily: 'Inter_900Black',
+    fontSize: 26,
+    fontWeight: 400,
+    lineHeight: 31.47,
+  },
+  img2: {
+    backgroundColor: '#FFFFFF',
+    width: 282,
+    height: 108,
+    top: 172,
+    left: 57,
+    borderRadius: 20,
+  
+  },
+  textult: {
+    width: 93,
+    height: 15,
+    top: 24,
+    left: 16,
+    fontFamily: 'Inter_900Black',
+    fontSize: 12,
+    fontWeight: 700,
+    lineHeight: 14.52,
+  },
+  greenButton: {
+    backgroundColor: '#0B2909',
+    width: 271,
+    height: 56,
+    top: 381,
+    left: 64,
+    borderRadius: 10,
+  },
+  buttonText: {
+    width: 135,
+    height: 188,
+    top: 19,
+    left: 68,
+    fontFamily: 'Inter_900Black',
+    fontSize: 15,
+    fontWeight: 400,
+    lineHeight: 18.15,
+  },
+});
