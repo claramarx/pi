@@ -1,0 +1,131 @@
+import { StatusBar } from 'expo-status-bar';
+import {Pressable, StyleSheet, Text, View,Image,Button} from 'react-native';
+import {style} from './src/style';
+import { useFonts} from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
+
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
+  });
+const onLayoutRootView = useCallback(async () => {
+  if (fontsLoaded || fontError) {
+    await SplashScreen.hideAsync();
+  }
+}, [fontsLoaded, fontError]);
+
+if (!fontsLoaded && !fontError) {
+  return null;
+}
+
+  return (
+    <View style={style.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+      <Text style={style.perfil}>Perfil</Text>
+      <Text style={style.usuario}>usuario</Text>
+      <Image source={require('./assets/tela - Copia.png')} style={style.Imagemperfil}/>
+      <Image source={require('./assets/telas(1).png')} style={style.tela2}/>
+    </View>
+  );
+  }
+
+function logout() {
+    signOut(auth)
+      .then(() => {
+        alert('Desconectou-se do sistema!');
+        router.replace('/');
+      })
+  return (
+    <View>
+      <Text>Profile!</Text>
+      <Button style={style.botao_sair}>
+        <Pressable onPress={logout}>
+          <Text>sair</Text>
+        </Pressable>
+      </Button>
+    </View>
+)}
+
+
+function DetailsScreen({ navigation }) {
+  return (
+    <View style={style.voltar}>
+      <Button title="Voltar" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  Imagemperfil: {
+    width: 282,
+    height: 325,
+    borderRadius: 20,
+    top: 155,
+    left: 57,
+  },
+  profileText: {
+    fontFamily: 'Inter-Black',
+    fontSize: 30,
+  },
+  perfil: {
+    ...profileText,
+    width: 85,
+    height: 33,
+    top: 19,
+    left: 98,
+    color: '#000000',
+  },
+  usuario: {
+    ...profileText,
+    width: 55,
+    height: 27,
+    top: 178,
+    left: 98,
+    fontSize: 20,
+    color: '#106518',
+  },
+  tela2: {
+    width: 428,
+    height: 313,
+    top: -108,
+    borderRadius: 70,
+  },
+  voltar: {
+    flex: 1,
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    width: 34,
+    height: 20,
+    top: 123,
+    left: 12,
+    fontFamily: 'Inter-Black',
+    fontSize: 15,
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0,
+    textAlign: 'left',
+  },
+  sairt: {
+    color: '#000000',
+    fontSize: 20,
+    fontFamily: 'Inter-Black',
+  },
+  botao_sair: {
+    width: 29,
+    height: 28,
+    top: 213,
+    left: 113,
+  },
+});
