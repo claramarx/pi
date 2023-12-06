@@ -1,0 +1,179 @@
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View,Image,TouchableOpacity  } from 'react-native';
+import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
+
+export default function App() {
+  let [fontsLoaded, fontError] = useFonts({
+    Inter_900Black,
+  });
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
+ return (
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <Text style={styles.voltar}>voltar</Text>
+      <Image source={require('./assets/telas(6).png')} style={style.imagem1}/>
+      <Text style={styles.irrig1}>Inrrigacao 01</Text>
+      <Text style={styles.umi1}>Umidade: 758U</Text>
+      <View style={styles.irrigationBox}>
+        <Text style={styles.irrigationTitle}>Situação: Umido</Text>
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity style={styles.greenButton}>
+            <Text style={styles.buttonText}>Ligar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.redButton}>
+            <Text style={styles.buttonText}>Desligar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Text style={styles.irrig2}>Inrrigacao 02</Text>
+      <Text style={styles.umi2}>Umidade: 758U</Text>
+      <View style={styles.irrigationBox}>
+        <Text style={styles.irrigationTitle}>Situação: Irrigando</Text>
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity style={styles.greenButton}>
+            <Text style={styles.buttonText}>Ligar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.redButton}>
+            <Text style={styles.buttonText}>Desligar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Image source={require('./assets/rectangle 1.png')} style={style.img_irrig1}/>
+      <Image source={require('./assets/rectangle 1 (1).png')} style={style.img_irrig2}/>
+      <Image source={require('./assets/rectangle 2.png')} style={style.img_tudo}/>
+      <Image source={require('./assets/rectangle 2 (1).png')} style={style.img_tudo2}/>
+      <View style={styles.irrigationBox}>
+        <Text style={styles.irrigationTitle}>Situação: Irrigando</Text>
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity style={styles.greenButton}>
+            <Text style={styles.buttonText}>Ligar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.redButton}>
+            <Text style={styles.buttonText}>Desligar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  voltar: {
+    color: '#FFF',
+    fontFamily: 'Inter_900Black',
+    width: 34,
+    height: 20,
+    top: 247,
+    left: 47,
+    fontSize:15,
+    lineHeight:20.21,
+  },
+  imagem1: {
+    width: 428,
+    height: 313,
+    top: -236,
+    left: -32,
+    borderRadius: 70,
+    backgroundColor: '#0B2909',
+
+  },
+  irrig1: {
+    color: '#FFF',
+    fontFamily: ' Inter_900Black',
+    width: 160,
+    height: 30,
+    top: 136,
+    left: 51,
+    fontSize:25,
+    lineHeight:30.26,
+  },
+  irrig2: {
+    color: '#FFF',
+    fontFamily: 'Inter_900Black',
+    width: 164,
+    height: 30,
+    top: 448,
+    left: 45,
+    fontSize:25,
+    lineHeight:30.26,
+  },
+  umi1: {
+    color: '#000000',
+    fontFamily: 'Inter_900Black',
+    width: 136,
+    height: 42,
+    top: 225,
+    left: 30,
+    fontSize:17,
+    lineHeight:20.57,
+  },
+  img_tudo: {
+    width: 333,
+    height: 185,
+    top: 208,
+    left: 15,
+    color: '#FFFFFF',
+  },
+  umi2: {
+    color: '#000000',
+    fontFamily: 'Inter_900Black',
+    width: 169,
+    height: 42,
+    top: 541,
+    left: 32,
+    fontSize:17,
+    lineHeight:20.57,
+  },
+  img_tudo2: {
+    width: 333,
+    height: 185,
+    top: 519,
+    left: 15,
+    color: '#FFFFFF',
+  },
+  irrigationBox: {
+    backgroundColor: '#fff',
+    margin: 10,
+    padding: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#193c35',
+  },
+  irrigationTitle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  greenButton: {
+    backgroundColor: '#007f00',
+    padding: 20,
+    borderRadius: 1,
+  },
+  redButton: {
+    backgroundColor: '#ff0000',
+    padding: 20,
+    borderRadius: 1,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+});
