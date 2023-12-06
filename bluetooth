@@ -1,0 +1,62 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import BluetoothSerial from 'react-native-bluetooth-serial-next';
+import { Link } from 'expo-router';
+
+export default function BluetoothControl() {
+  const [connected, setConnected] = useState(false);
+
+  useEffect(() => {
+    connectToBluetoothDevice(); // Função para se conectar ao dispositivo Bluetooth
+  }, []);
+
+  const connectToBluetoothDevice = async () => {
+    try {
+      const isEnabled = await BluetoothSerial.isEnabled();
+      if (!isEnabled) {
+        await BluetoothSerial.requestEnable();
+      }
+
+      const devices = await BluetoothSerial.list();
+      const device = devices.find(device => device.name === 'NomeDoSeuDispositivoBluetooth'); // Substitua pelo nome do seu dispositivo Bluetooth
+
+      if (device) {
+        await BluetoothSerial.device(device.id).connect();
+        setConnected(true);
+        console.log('Conectado ao dispositivo Bluetooth!');
+      } else {
+        console.log('Dispositivo Bluetooth não encontrado.');
+      }
+
+    } catch (error) {
+      console.error('Erro ao conectar ao dispositivo Bluetooth:', error.message);
+    }
+  };
+
+  const sendCommand = async (command) => {
+    try {
+      await BluetoothSerial.write(command);
+      console.log('Comando enviado:', command);
+    } catch (error) {
+      console.error('Erro ao enviar comando:', error.message);
+    }
+  };
+
+  const handleToggleDevice = () => {
+    if (connected) {
+      sendCommand('LIGAR'); // Envie o comando correto para ligar o dispositivo Bluetooth (Arduino)
+    } else {
+      console.log('Ainda não conectado ao dispositivo Bluetooth.');
+    }
+  };
+
+  return (
+    <View>
+      <Text>Bluetooth Control</Text>
+      <TouchableOpacity onPress={handleToggleDevice}>
+        <Text>Ligar/Desligar</Text>
+      </TouchableOpacity>
+      <Link href={'/integracao.js'}>.</Link>
+    </View>
+  );
+}
