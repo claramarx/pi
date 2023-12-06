@@ -1,0 +1,113 @@
+import React from 'react';
+import { StyleSheet, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Text, View } from 'react-native';
+import { Link } from 'expo-router';
+
+export default function App() {
+  return (
+    <KeyboardAvoidingView style={styles.background}>
+      <View style={styles.containerlogo}>
+        <Image
+          source={require('./src/routes/Frame 21.png')}
+        />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.loginText}>LOGIN</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='Email'
+          autoCorrect={false}
+          onChangeText={() => { }}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Senha'
+          autoCorrect={false}
+          onChangeText={() => { }}
+        />
+        <TouchableOpacity style={styles.btnSubmit}>
+          <Text style={styles.submitText}>Acessar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnRegister}>
+          <Text style={styles.registerText}>Criar conta</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.circlesContainer}>
+        <View style={styles.circle}></View>
+        <View style={styles.circle}></View>
+        <Link href={'/index.js'} style={styles.loginLink}>Home</Link>
+      </View>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  containerlogo: {
+    marginBottom: 4,
+    justifyContent: 'center',
+  },
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '90%',
+    paddingBottom: 100,
+  },
+  loginText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  input: {
+    backgroundColor: '#fff',
+    width: '90%',
+    marginBottom: 15,
+    color: '#222',
+    fontSize: 17,
+    borderRadius: 7,
+    borderColor: '#191919',
+    borderWidth: 1,
+    padding: 10,
+  },
+  btnSubmit: {
+    backgroundColor: '#193c35',
+    width: '50%',
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+  },
+  submitText: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  btnRegister: {
+    marginTop: 10,
+  },
+  registerText: {
+    color: '#000',
+  },
+  circlesContainer: {
+    position: 'absolute',
+    bottom: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    left: 2,
+    right: 10,
+  },
+  circle: {
+    width: 90,
+    height: 90,
+    borderRadius: 50,
+    backgroundColor: '#193c35',
+  },
+  loginLink: {
+    color: '#193c35',
+    fontWeight: 'bold',
+  },
+});
